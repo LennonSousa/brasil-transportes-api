@@ -1,9 +1,14 @@
-import express from "express";
+import express, { request, response }  from "express";
 
-const server = express();
+import './infra/database/connection'
 
-server.use(express.json());
+const app = express();
 
-server.listen(3333, () => {
+app.get("/", (request, response ) => {
+  return response.send("ola nlw 5")
+})
+
+app.listen(3332, () => {
   console.log("> Server is running...");
 });
+
