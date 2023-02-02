@@ -1,40 +1,43 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm"
-import { Driver } from "../../drivers/entities/driver.entity"
-import { routes } from "../../routes/entities/routes.entity"
-import { Trucks } from "../../trucks/entities/truck.entity"
+import {
+  Entity,
+  Column,
+  JoinColumn,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+  PrimaryColumn
+} from 'typeorm'
+import { Trucks } from '../../trucks/entities/truck.entity'
+import { v4 as uuid } from 'uuid'
 
-@Entity("maintenance")
+@Entity('maintenances')
 export class Maintenance {
-    @PrimaryGeneratedColumn()
-  id!: number
+  @PrimaryColumn()
+  id!: string
 
-    
+  @Column()
+  maintenanceType!: String
 
-    @Column()
-    maintenanceType!: String
+  @Column()
+  maintenancePrice!: number
 
-    @Column()
-    maintenancePrice!: number
+  @Column()
+  date!: Date
 
-    @JoinColumn({ name: "trucker"})
-    @ManyToOne(() => Trucks)
+  @Column()
+  truckId!: string
 
-    @Column()
-    trucks!: string
-    
-    @JoinColumn({ name: "drives"})
-    @ManyToOne(() => Driver)
+  @CreateDateColumn()
+  createdAt!: Date
 
-    @Column()
-    drives!: string
+  @UpdateDateColumn()
+  updatedAt!: Date
 
-    @JoinColumn({ name: "routes"})
-    @ManyToOne(() => routes)
+  @ManyToOne(() => Trucks, trucks => trucks.maintenances)
+  @JoinColumn({ name: 'truckId' })
+  truck!: Trucks
 
-    @Column()
-    routes!: string
-
-    
-    @Column()
-    date!: Date
+  constructor() {
+    if (!this.id) this.id = uuid()
+  }
 }
