@@ -8,21 +8,21 @@ import {
   PrimaryColumn
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
-import { Trucks } from '../../trucks/entities/truck.entity'
+import { Truck } from '../../trucks/entities/truck.entity'
 
-@Entity('routes')
+@Entity('route')
 export class Route {
   @PrimaryColumn()
   id!: string
 
   @Column()
-  mileage!: string
+  mileage!: number
 
   @Column()
   start!: String
 
   @Column()
-  end!: number
+  end!: string
 
   @CreateDateColumn()
   createdAt!: Date
@@ -30,11 +30,11 @@ export class Route {
   @UpdateDateColumn()
   updatedAt!: Date
 
-  @OneToOne(() => Trucks, truck => truck.route, {
+  @OneToOne(() => Truck, truck => truck.route, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'routeId' })
-  truck!: Trucks
+  truck!: Truck
 
   constructor() {
     if (!this.id) this.id = uuid()

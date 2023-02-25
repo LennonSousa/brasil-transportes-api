@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   PrimaryColumn
 } from 'typeorm'
-import { Trucks } from '../../trucks/entities/truck.entity'
+import { Truck } from '../../trucks/entities/truck.entity'
 import { v4 as uuid } from 'uuid'
 
 @Entity('maintenances')
@@ -33,9 +33,9 @@ export class Maintenance {
   @UpdateDateColumn()
   updatedAt!: Date
 
-  @ManyToOne(() => Trucks, trucks => trucks.maintenances)
+  @ManyToOne(() => Truck, truck => truck.maintenances)
   @JoinColumn({ name: 'truckId' })
-  truck!: Trucks
+  truck!: Truck
 
   constructor() {
     if (!this.id) this.id = uuid()

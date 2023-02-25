@@ -8,7 +8,7 @@ import {
   PrimaryColumn
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
-import { Trucks } from '../../trucks/entities/truck.entity'
+import { Truck } from '../../trucks/entities/truck.entity'
 
 @Entity('drivers')
 export class Driver {
@@ -27,10 +27,10 @@ export class Driver {
   @UpdateDateColumn()
   updatedAt!: Date
 
-  @OneToOne(() => Trucks, truck => truck.driver, {
+  @OneToOne(() => Truck, truck => truck.driver, {
     cascade: ['insert', 'update']
   })
-  truck!: Trucks
+  truck!: Truck
 
   constructor() {
     if (!this.id) this.id = uuid()

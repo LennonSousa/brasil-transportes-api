@@ -15,8 +15,8 @@ import { Maintenance } from '../../maintenance/entities/maintenance.entity'
 import { Route } from '../../routes/entities/routes.entity'
 import { Travel } from '../../travel/entities/travel.entity'
 
-@Entity('trucks')
-export class Trucks {
+@Entity('truck')
+export class Truck {
   @PrimaryColumn()
   id!: string
 
@@ -24,7 +24,7 @@ export class Trucks {
   model!: string
 
   @Column()
-  axle!: string
+  axle!: number
 
   @Column()
   sign!: string
